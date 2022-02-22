@@ -119,7 +119,9 @@ class _TerminalViewState extends State<TerminalView> {
         _cellSize.cellHeight * widget.terminal.scrollOffsetFromTop;
 
     if (mounted) {
-      setState(() {});
+      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+        setState(() {});
+      });
     }
   }
 
