@@ -35,6 +35,7 @@ class TerminalView extends StatefulWidget {
     this.padding = 0.0,
     this.withCopyPasteOnDekstop = false,
     this.copyPasteOnDesktopFunction,
+    this.copyPasteOnDesktopDismissFunction,
   })  : focusNode = focusNode ?? FocusNode(),
         scrollController = scrollController ?? ScrollController(),
         inputBehavior = inputBehavior ?? InputBehaviors.platform,
@@ -61,6 +62,7 @@ class TerminalView extends StatefulWidget {
 
   final bool withCopyPasteOnDekstop;
   final Function(double, double)? copyPasteOnDesktopFunction;
+  final VoidCallback? copyPasteOnDesktopDismissFunction;
 
   // get the dimensions of a rendered character
   CellSize measureCellSize(double fontSize) {
@@ -301,6 +303,9 @@ class _TerminalViewState extends State<TerminalView> {
         if (_tapPosition != null) {
           widget.terminal.onMouseTap(_tapPosition!);
           widget.terminal.refresh();
+        }
+        if (widget.withCopyPasteOnDekstop) {
+          widget.copyPasteOnDesktopDismissFunction?.call();
         }
       },
       onPanStart: (detail) {
