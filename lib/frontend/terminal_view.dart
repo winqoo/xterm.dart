@@ -283,9 +283,6 @@ class _TerminalViewState extends State<TerminalView> {
       onDoubleTapDown: (detail) {
         final pos = detail.localPosition;
         _tapPosition = getMouseOffset(pos.dx, pos.dy);
-        if (widget.withCopyPasteOnDekstop) {
-          widget.copyPasteOnDesktopFunction?.call(pos.dx, pos.dy);
-        }
       },
       onTapDown: (detail) {
         final pos = detail.localPosition;
